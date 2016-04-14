@@ -1,4 +1,5 @@
 #!/bin/bash
+# Take tenantid as an argument
 
 dirname=`dirname $0`
 

@@ -4,7 +4,7 @@
 TENANT=$1
 PASSWORD=$1
 TENANT_DESC="$1"
-TENANT_EMAIL="tenant@test.com"
+TENANT_EMAIL="project@lab.com"
 TENANT_NET_CIDR="10.0.0.0/24"
 TENANT_NET_GW="10.0.0.1"
 ############### 
@@ -17,7 +17,7 @@ TENANT_ID=$(openstack project list | awk "/\ $TENANT\ / { print \$2 }")
 openstack user create --project $TENANT --password $PASSWORD --email $TENANT_EMAIL $TENANT
 
 # Create the network with VXLAN
-neutron net-create --tenant-id $TENANT_ID --provider:network_type vxlan  "$TENANT-net"
+neutron net-create --tenant-id $TENANT_ID --provider:network_type vxlan "$TENANT-net"
 
 # Create the subnet and get the ID
 neutron subnet-create --name "$TENANT-subnet" --tenant-id $TENANT_ID --gateway $TENANT_NET_GW "$TENANT-net" $TENANT_NET_CIDR --dns-nameserver 8.8.8.8 --dns-nameserver 8.8.4.4

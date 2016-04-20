@@ -7,11 +7,13 @@ then
     # do dangerous stuffa
     dirname=`dirname $0`
     tenant=`$dirname/get-tenantid.sh $1`
-
+    $dirname/create-temp-user.sh $1
     $dirname/del-muranoenv.sh $1
+    $dirname/del-temp-user.sh $1
     $dirname/del-vm.sh $tenant
+    # $dirname/del-ports.sh $tenant
     $dirname/del-router.sh $tenant
     $dirname/del-net.sh $tenant
-    openstack project delete $1
-    openstack user delete $1
+    # openstack project delete $1
+    # openstack user delete $1
 fi

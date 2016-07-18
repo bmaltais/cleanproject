@@ -3,6 +3,9 @@
 
 dirname=`dirname $0`
 
+echo "Deleting Murano environments if any"
+echo "==================================="
+
 for j in $( $dirname/get-muranoenv.sh $1 ); do
   echo Deleting murano env id $j
   murano --os-username $1-a --os-password $1-a --os-tenant-name $1 environment-delete $j
@@ -15,3 +18,4 @@ while ! [ -z $WAITING ]; do
   WAITING=`$dirname/get-muranoenv.sh $1`
 done
 
+echo "Murano environment deletion step done"

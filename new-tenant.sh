@@ -14,7 +14,7 @@ openstack project create $TENANT --description $TENANT_DESC
 TENANT_ID=$(openstack project list | awk "/\ $TENANT\ / { print \$2 }")
 
 # Create a new user 
-openstack user create --project $TENANT --password $PASSWORD --email $TENANT_EMAIL $TENANT
+# openstack user create --project $TENANT --password $PASSWORD --email $TENANT_EMAIL $TENANT
 
 # Create the network with VXLAN
 neutron net-create --tenant-id $TENANT_ID --provider:network_type vxlan "$TENANT-net"

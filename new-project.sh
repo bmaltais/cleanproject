@@ -6,21 +6,23 @@ if [ "$#" -ne 1 ]; then
 fi
 
 ############## Define those variables for the tenant (this is just an example)
+dirname=`dirname $0`
 TENANT=$1
 PASSWORD=$1
 TENANT_DESC="$1"
-TENANT_EMAIL="project@lab.com"
+#TENANT_EMAIL="project@lab.com"
 TENANT_NET_CIDR="10.0.0.0/24"
 #TENANT_NET_CIDR="10.0.0.0/24"
 #TENANT_NET_GW="10.0.0.1"
 ############### 
 
 # Create a new project and get the id
-openstack project create $TENANT --description $TENANT_DESC 
+$dirname/create-project.sh $TENANT
+#openstack project create $TENANT --description $TENANT_DESC 
 TENANT_ID=$(openstack project list | awk "/\ $TENANT\ / { print \$2 }")
 
 # Create a new user 
-openstack user create --project $TENANT --password $PASSWORD --email $TENANT_EMAIL $TENANT
+#openstack user create --project $TENANT --password $PASSWORD --email $TENANT_EMAIL $TENANT
 
 # Create the network with VXLAN
 neutron net-create --tenant-id $TENANT_ID --provider:network_type vxlan "$TENANT-net"

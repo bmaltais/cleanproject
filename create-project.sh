@@ -17,7 +17,7 @@ OS_TOKEN=`curl -i \
     },
     "scope": {
       "project": {
-        "name": "'OS_PROJECT_NAME'",
+        "name": "'$OS_PROJECT_NAME'",
         "domain": { "name": "mgmt" }
       }
     }
